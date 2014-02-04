@@ -9,12 +9,13 @@ import java.net.URL;
 /**
  * Builds a sitemap for Google News.  To configure options, use {@link #builder(URL, File)}
  * @author Dan Fabulich
+ * @author Bryan Campbell
  * @see <a href="http://www.google.com/support/news_pub/bin/answer.py?answer=74288">Creating a News Sitemap</a>
  */
 public class GoogleNewsSitemapGenerator extends SitemapGenerator<GoogleNewsSitemapUrl,GoogleNewsSitemapGenerator> {
 
-	/** 1000 URLs max in a Google News sitemap. */
-	public static final int MAX_URLS_PER_SITEMAP = 1000;
+	/** 50,000 URLs max in a Google News sitemap. */
+	public static final int MAX_URLS_PER_SITEMAP = 50000;
 	
 	/** Configures a builder so you can specify sitemap generator options
 	 * 
@@ -25,7 +26,7 @@ public class GoogleNewsSitemapGenerator extends SitemapGenerator<GoogleNewsSitem
 	public static SitemapGeneratorBuilder<GoogleNewsSitemapGenerator> builder(URL baseUrl, File baseDir) {
 		SitemapGeneratorBuilder<GoogleNewsSitemapGenerator> builder = 
 			new SitemapGeneratorBuilder<GoogleNewsSitemapGenerator>(baseUrl, baseDir, GoogleNewsSitemapGenerator.class);
-		builder.maxUrls = 1000;
+		builder.maxUrls = MAX_URLS_PER_SITEMAP;
 		return builder;
 	}
 	
@@ -45,7 +46,7 @@ public class GoogleNewsSitemapGenerator extends SitemapGenerator<GoogleNewsSitem
 	GoogleNewsSitemapGenerator(AbstractSitemapGeneratorOptions<?> options) {
 		super(options, new Renderer());
 		if (options.maxUrls > GoogleNewsSitemapGenerator.MAX_URLS_PER_SITEMAP) {
-			throw new RuntimeException("Google News sitemaps can have only 1000 URLs per sitemap: " + options.maxUrls);
+			throw new RuntimeException("Google News sitemaps can have only "+MAX_URLS_PER_SITEMAP+" URLs per sitemap: " + options.maxUrls);
 		}
 	}
 
@@ -79,7 +80,16 @@ public class GoogleNewsSitemapGenerator extends SitemapGenerator<GoogleNewsSitem
 				W3CDateFormat dateFormat) throws IOException {
 			StringBuilder sb = new StringBuilder();
 			sb.append("    <news:news>\n");
+			sb.append("      <news:publication>\n");
+			sb.append("  ");
+			renderTag(sb, "news", "name", url.getPublication().getName());
+			sb.append("  ");
+			renderTag(sb, "news", "language", url.getPublication().getLanguage());
+			sb.append("      </news:publication>\n");
+			renderTag(sb, "news", "access", url.getAccess());
+			renderTag(sb, "news", "genres", url.getGenres());
 			renderTag(sb, "news", "publication_date", dateFormat.format(url.getPublicationDate()));
+			renderTag(sb, "news", "title", url.getTitle());
 			renderTag(sb, "news", "keywords", url.getKeywords());
 			sb.append("    </news:news>\n");
 			super.render(url, out, dateFormat, sb.toString());

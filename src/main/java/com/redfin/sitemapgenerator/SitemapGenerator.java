@@ -190,8 +190,9 @@ abstract class SitemapGenerator<U extends ISitemapUrl, THIS extends SitemapGener
 		outFiles.add(outFile);
 		try {
 			OutputStreamWriter out;
+			FileOutputStream fileStream = null;
 			if (gzip) {
-				FileOutputStream fileStream = new FileOutputStream(outFile);
+				fileStream = new FileOutputStream(outFile);
 				GZIPOutputStream gzipStream = new GZIPOutputStream(fileStream);
 				out = new OutputStreamWriter(gzipStream);
 			} else {
@@ -200,6 +201,7 @@ abstract class SitemapGenerator<U extends ISitemapUrl, THIS extends SitemapGener
 			
 			writeSiteMap(out);
 			if (autoValidate) SitemapValidator.validateWebSitemap(outFile);
+			if (fileStream != null) fileStream.close();
 		} catch (IOException e) {
 			throw new RuntimeException("Problem writing sitemap file " + outFile, e);
 		} catch (SAXException e) {

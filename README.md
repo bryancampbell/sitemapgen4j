@@ -3,6 +3,8 @@ sitemapgen4j
 
 SitemapGen4j is a library to generate XML sitemaps in Java.
 
+Forked by Bryan L Campbell to update the News Sitemap Generator to use Google's latest specifications
+
 <h2>What's an XML sitemap?</h2>
 
 Quoting from <a href="http://sitemaps.org/index.php">sitemaps.org</a>:
