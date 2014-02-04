@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.github.dfabulich</groupId>
+  <groupId>com.bryanlcampbell.component</groupId>
   <artifactId>sitemapgen4j</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>SitemapGen4J</name>
-  <url>https://github.com/dfabulich/sitemapgen4j/</url>
+  <url>https://github.com/bryancampbell/sitemapgen4j/</url>
   <description>SitemapGen4j is an XML sitemap generator written in Java.</description>
   <licenses>
     <license>
@@ -16,9 +16,9 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:git://github.com:dfabulich/sitemapgen4j.git</connection>
-    <developerConnection>scm:git:git@github.com:dfabulich/sitemapgen4j.git</developerConnection>
-    <url>https://github.com/dfabulich/sitemapgen4j/</url>
+    <connection>scm:git:git://github.com:bryancampbell/sitemapgen4j.git</connection>
+    <developerConnection>scm:git:git@github.com:bryancampbell/sitemapgen4j.git</developerConnection>
+    <url>https://github.com/bryancampbell/sitemapgen4j/</url>
   </scm>
   <developers>
     <developer>
@@ -27,6 +27,14 @@
       <email>dan@fabulich.com</email>
       <organization>Redfin</organization>
       <organizationUrl>http://www.redfin.com/</organizationUrl>
+      <timezone>-8</timezone>
+    </developer>
+    <developer>
+      <id>bryancampbell</id>
+      <name>Bryan Campbell</name>
+      <email>bryan@familycampbell.org</email>
+      <organization>bryanlcampbell.com</organization>
+      <organizationUrl>http://bryanlcampbell.com/</organizationUrl>
       <timezone>-8</timezone>
     </developer>
   </developers>
